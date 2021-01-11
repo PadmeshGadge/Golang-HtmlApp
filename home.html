@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+  <head>
+    <meta charset="utf-8">
+    <title>Golang Html app</title>
+    <link rel="stylesheet" type="text/css" href="css/styles.css">
+    <link href="css/bootstrap.min.css" rel="stylesheet">
+    <link href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet"
+		  integrity="sha384-wvfXpqpZZVQGK6TAh5PVlGOfQNHSoD2xbE+QkPxCAFlNEevoEH3Sl0sibVcOQVnN" crossorigin="anonymous">
+    <link href="css/bstreeview.css" rel="stylesheet">
+  </head>
+  <body>
+    <h1>Welcome {{.Name}}</h1>
+    <form action="/logout" method="POST">
+        <input class="btn" type="submit" value="Logout" />
+        <input class="btn" type="submit" value="Add student" formaction="/AddStudent">
+        <input class="btn" type="submit" value="View students" formaction="/ViewStudent">
+    </form>
+    <p display="none" id="jstr">{{.Jsonstring}}</p>
+    <div id="tree">
+
+    </div>
+    <script src="js/jquery-3.5.1.min.js"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js"
+			integrity="sha384-wfSDF2E50Y2D1uUdj0O3uMBJnjuUD4Ih7YwaYd1iqfktj0Uod8GCExl3Og8ifwB6"
+			crossorigin="anonymous"></script>
+    <script src="js/bstreeview.js"></script>
+    <script>
+      $(function () {
+  
+        var val = document.getElementById("jstr").innerHTML
+        const json = JSON.parse(val)
+        console.log(json)
+        // var json = [{text:"Name"},{text:"Gender"},{text:"location"},{text:"email"}];
+        $('#tree').bstreeview({
+          data: json,
+                  expandIcon: 'fa fa-angle-down fa-fw',
+                  collapseIcon: 'fa fa-angle-right fa-fw',
+                  indent: 1.25,
+                  parentsMarginLeft: '1.25rem',
+                  openNodeLinkOnNewTab: true
+        });
+      });
+    </script>
+  </body>
+</html>

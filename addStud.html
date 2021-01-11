@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+  <head>
+    <meta charset="utf-8">
+    <title>Golang Html app</title>
+    <link rel="stylesheet" type="text/css" href="css/styles.css">
+  </head>
+  <body>      
+    <div id="form-box">
+        <form method="POST">
+            <label class="input-label" for="name">Name</label> <input id="name" type="text" name="name" /><br>
+            <label class="input-label" for="gen">Gender</label> <input id="gen" type="text" name="gender" /><br>
+            <label class="input-label" for="loc">Location</label> <input id="loc" type="text" name="location" /><br>
+            <label class="input-label" for="email">Email Id</label> <input id="email" type="text" name="email-id" /><br>
+            <input class="btn" id="btnback" type="submit" value="Back" formaction="/dashboard">
+        </form>  
+            <input class="btn" id="btnadd" type="submit" value="Add" />
+    </div>
+    
+
+    <script>
+        var btn = document.getElementById("btnadd")
+        btn.addEventListener("click",function(){
+            var name = document.getElementById("name").value
+            var gender = document.getElementById("gen").value
+            var loc = document.getElementById("loc").value
+            var email = document.getElementById("email").value
+            const send = {
+                name : name,
+                gender : gender,
+                location : loc,
+                email : email
+            };
+            const jsonString = JSON.stringify(send);
+            console.log(jsonString);
+            const xhr = new XMLHttpRequest();
+            xhr.open("POST","/addnew");
+            xhr.setRequestHeader("Content-Type","application/json")
+            xhr.send(jsonString);
+            document.getElementById("name").value = "";
+            document.getElementById("gen").value = "";
+            document.getElementById("loc").value = "";
+            document.getElementById("email").value = "";
+        });  
+    </script>
+  </body>
+</html>
